@@ -90,4 +90,52 @@ After resetting the password, check the login:
 sudo mysql -u root -p
 Pwd: Vani@0306
 
+# Installing NetCat:
+sudo apt update
+sudo apt install netcat
+
+nc localhost 8080
+
+@vanim-git ➜ /workspaces/Prototypes (main) $ nc localhost 8080
+Hello
+Response from backend 5002: Hello
+@vanim-git ➜ /workspaces/Prototypes (main) $
+
+# Installing Flask (Web Framework) and mysql connector for Python:
+1. pip install flask mysql-connector-python
+
+2. Start mysql service as daemon:
+sudo service mysql start
+
+3. Check if mysql is running:
+sudo service mysql status
+
+4. sudo mysql -u root -p
+Enter 'Vani@0306' when prompted for password.
+
+Note: This password remains until I reinstall mysql in the codespace. 
+
+5. at prompt 'mysql>' execute these sql commands to create the shards (databases)
+
+CREATE DATABASE blog_db_0;
+CREATE DATABASE blog_db_1;
+
+6. Verify the Databases using:
+SHOW DATABASES;
+
+7. Exit mysql using:
+EXIT;
+
+# Modify app.run() to Listen on All Interfaces 
+
+1. By default, Flask binds to 127.0.0.1, which is not accessible outside the container. Change your Blog_App.py to:
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
+This allows external connections.
+
+2. Start Flask:
+
+Python3 Blog_App.py
 
