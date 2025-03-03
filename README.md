@@ -201,3 +201,7 @@ Change to use blog_db_0 database
 mysql> use blog_db_0;
 mysql> SELECT * FROM posts;
 
+# In order to get the posts posted by user_id = 1, paste this URL in browser:
+https://super-duper-umbrella-5grvv4pj6jv2p66g-5000.app.github.dev/get_posts/1
+
+here, get_posts/1 will execute get_posts api with user_id parameter value as 1
