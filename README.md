@@ -135,7 +135,69 @@ if __name__ == "__main__":
 
 This allows external connections.
 
-2. Start Flask:
+2. Start Flask App:
 
-Python3 Blog_App.py
+python3 Blog_App.py
+
+# To check if Blog_App is running and accessible using external link:
+
+cmd$ curl http://0.0.0.0:5000/ 
+cmd$ ps aux | grep Blog_App 
+
+will show the pid details of running Blog_App flask application
+
+# If you see 404 issues:
+
+✅ 3. Check for Port Forwarding Issues
+VS Code automatically forwards ports, but you may need to manually check and expose it:
+
+Open the Ports tab in VS Code (View → Ports).
+Look for Port 5000.
+If it's missing, add it manually:
+Click "Forward a Port" and enter 5000.
+If it's already there but not accessible, restart the Codespace.
+
+✅ 4. Check Your Flask Routes
+If Flask is running but you still get 404 Not Found, it may be because no route matches /.
+
+Test by running:
+
+curl http://0.0.0.0:5000/
+If it returns 404, ensure you have a defined route in Blog_App.py:
+
+@app.route("/")
+def home():
+    return "Hello, Flask in Codespaces!"
+
+
+✅ Check the Port Forwarding in VS Code
+
+Open the Ports tab in VS Code (View → Ports).
+Look for Port 5000.
+If missing, add it manually:
+Click Forward a Port.
+Enter 5000 and select Public access.
+
+For port 5000: (Ensure this port is publicly visible and it is configured to use HTTP and not HTTPS)
+1. right-click -> choose port visibility -> public
+2. right-click -> choose port protocol -> HTTP
+
+Now try refreshing the external link.
+
+# Commands to create posts: create_post is a POST command. so use curl with -L as:
+curl -X POST -L http://super-duper-umbrella-5grvv4pj6jv2p66g-5000.app.github.dev/create_post -H "Content-Type: application/json" -d '{"user_id": 2, "title": "My First Post", "content": "This is a test post - 5."}'
+
+This will show below response if successful. Make sure the password in db_config is correct 
+
+{
+  "message": "Post created successfully"
+}
+
+Note: A browser sends GET requests by default, you need to send a POST request manually either by using CURL commands or using POSTMAN tool.
+
+# After creating posts, verify the posts are added in the DB tasble posts, using these commands:
+
+Change to use blog_db_0 database
+mysql> use blog_db_0;
+mysql> SELECT * FROM posts;
 

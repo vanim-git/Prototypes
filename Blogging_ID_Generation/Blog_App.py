@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 # Database configurations for two shards
 db_config = {
-    0: {"host": "localhost", "user": "root", "password": "password", "database": "blog_db_0"},
-    1: {"host": "localhost", "user": "root", "password": "password", "database": "blog_db_1"},
+    0: {"host": "localhost", "user": "root", "password": "Vani@0306", "database": "blog_db_0"},
+    1: {"host": "localhost", "user": "root", "password": "Vani@0306", "database": "blog_db_1"},
 }
 
 def get_db_connection(user_id):
@@ -56,6 +56,10 @@ def get_posts(user_id):
     conn.close()
     
     return jsonify(posts)
+
+@app.route("/")
+def home():
+    return "Hello from Flask in Codespaces!"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
